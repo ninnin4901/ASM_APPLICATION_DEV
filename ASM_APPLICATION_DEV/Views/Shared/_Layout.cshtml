@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ASM_APPLICATION_DEV.Utils;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,12 +20,50 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (User.IsInRole(Role.STORE_OWNER))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Books" asp-action="ViewAllBook">Book Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Category Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Orders" asp-action="ViewOrdersForStoreOwner">Record Management</a>
+                            </li>
+
+                        }
+                        @if (User.IsInRole(Role.CUSTOMER))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Views" asp-controller="Books" asp-action="ViewBooksForCustomer">View Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="OrderDetails" asp-action="Index">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Views" asp-controller="Home" asp-action="Help">Help</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Views" asp-controller="Orders" asp-action="Index">Orders</a>
+                            </li>
+                            
+
+                        }
+                        @if (User.IsInRole(Role.STORE_OWNER))
+                        {
+                            <li class="nav-item">
+                            </li>
+                        }
+                        @if (User.IsInRole(Role.ADMIN))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Views" asp-controller="Categories" asp-action="ManageCategory">Manage Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Views" asp-controller="Accounts" asp-action="Index">Manage Account</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

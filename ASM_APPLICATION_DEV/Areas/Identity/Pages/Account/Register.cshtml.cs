@@ -137,7 +137,7 @@ namespace ASM_APPLICATION_DEV.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.FullName = Input.Email;
                 await _userStore.SetUserNameAsync((User)user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync((User)user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync((User)user, Input.Password);

@@ -1,8 +1,26 @@
-﻿@{
+﻿@using ASM_APPLICATION_DEV.Utils;
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole(Role.STORE_OWNER))
+        {
+            <a asp-controller="Books" asp-action="Index" class="btn btn-primary">Management Your Book Store</a>
+        }
+        if (User.IsInRole(Role.CUSTOMER))
+        {
+            <a asp-controller="Books" asp-action="ViewBooksForCustomer" class="btn btn-primary">Go To Shopping</a>
+
+        }
+        if (User.IsInRole(Role.ADMIN))
+        {
+            <a asp-controller="Accounts" asp-action="Index" class="btn btn-primary">Go To Manager</a>
+
+        }
+    }
 </div>
