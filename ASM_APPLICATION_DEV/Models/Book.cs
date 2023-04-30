@@ -18,6 +18,7 @@ namespace ASM_APPLICATION_DEV.Models
 		public string InformationBook { get; set; } = string.Empty;
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
 		public byte[]? Image { get; set; } 
+		public string? Author { get; set; }
 
 		[Required]
 		[ForeignKey("Category")]

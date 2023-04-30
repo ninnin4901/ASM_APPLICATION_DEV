@@ -54,6 +54,7 @@ namespace ASM_APPLICATION_DEV.Controllers
 						NameBook = viewModel.Book.NameBook,
 						QuantityBook = viewModel.Book.QuantityBook,
 						Price = viewModel.Book.Price,
+						Author = viewModel.Book.Author,
 						InformationBook = viewModel.Book.InformationBook,
 						Image = memoryStream.ToArray(),
 						CategoryId = viewModel.Book.CategoryId
