@@ -3,24 +3,77 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @if (User.Identity.IsAuthenticated)
-    {
-        if (User.IsInRole(Role.STORE_OWNER))
-        {
-            <a asp-controller="Books" asp-action="Index" class="btn btn-primary">Management Your Book Store</a>
-        }
-        if (User.IsInRole(Role.CUSTOMER))
-        {
-            <a asp-controller="Books" asp-action="ViewBooksForCustomer" class="btn btn-primary">Go To Shopping</a>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using ASM_APPLICATION_DEV.DTOs.Responses
+@model IEnumerable<BookView>
 
-        }
-        if (User.IsInRole(Role.ADMIN))
-        {
-            <a asp-controller="Accounts" asp-action="Index" class="btn btn-primary">Go To Manager</a>
+<style>
 
-        }
+
+
+
+    .form-wrapper {
+        display: flex;
+        margin: 10px 0 10px 0;
     }
+
+    #search-box {
+        display: flex;
+    }
+
+    #search-input {
+        width: 640px;
+    }
+
+    #btn-search {
+        margin: 0 10px 0 10px;
+    }
+</style>
+<div class="form-wrapper">
+    <form id="search-box" asp-controller="Books" asp-action="IndexBooksForCustomer" method="get">
+        <input id="search-input" name="nameOrCategoryBook" class="form-control" placeholder="Enter Book You Want To Search" />
+        <input type="submit" value="Search" id="btn-search" class="btn btn-secondary" />
+    </form>
 </div>
+
+
+<section style="background-color: #eee;">
+
+
+    <div class="container py-5">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0" style=" margin-bottom: 10px !important">
+                    <div class="card" style=" border-radius: 10px !important ">
+                        <a asp-controller="Books" asp-action="DetailsBookForCustomer" asp-route-id=@item.Id>
+                            <div style="height: 240px;align-content: center;display: flex;">
+                                <img src="@item.ImageBook"
+                                     class="card-img-top" style="border-radius: 10px !important;object-fit: cover;" />
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <a asp-controller="Books" asp-action="DetailsBookForCustomer" asp-route-id=@item.Id>
+                                    <h5 class="mb-0">@item.NameBook</h5>
+                                </a>
+                            </div>
+                            <div>
+                                <span src="" class="text-dark mb-0">@item.PriceBook VND</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted mb-0" src="">Available:<span class="fw-bold">@item.QuantityBook</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+

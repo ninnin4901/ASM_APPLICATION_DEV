@@ -13,5 +13,6 @@ namespace ASM_APPLICATION_DEV.DTOs.Responses
         public int PriceBook { get; set; }
         public string DescriptionBook { get; set; } = string.Empty;
         public string ImageBook { get; set; } = string.Empty;
+        public string? Author { get; set; }
     }
 }

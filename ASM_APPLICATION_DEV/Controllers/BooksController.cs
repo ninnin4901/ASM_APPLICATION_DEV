@@ -157,6 +157,7 @@ namespace ASM_APPLICATION_DEV.Controllers
                 book.QuantityBook = item.QuantityBook;
                 book.PriceBook = item.Price;
                 book.ImageBook = ConvertByteArrayToStringBase64(item.Image);
+				book.Author = item.Author;
                 listBookInHome.Add(book);
             }
             return View(listBookInHome);
@@ -181,6 +182,7 @@ namespace ASM_APPLICATION_DEV.Controllers
             bookView.PriceBook = book.Price;
             bookView.DescriptionBook = book.InformationBook;
             bookView.ImageBook = ConvertByteArrayToStringBase64(book.Image);
+			bookView.Author = book.Author;	
 
             return View(bookView);
         }
